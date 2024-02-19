@@ -35,3 +35,25 @@ window.open("https://wall.roulax.io/discovery?app_id={app_id}&unit_id={unit_id}&
 | publisher_id | Your PublisherId can be obtained from the platform. (The OW H5 Link obtained from the platform has filled in publisher_id) | mandatory |
 | gaid         | If you are an Android user, please fill in GAID; if you are an iOS user, please fill in IDFA | mandatory |
 | userid       | Unique client's user ID                                      | mandatory |
+
+## Receive reward callback
+
+1、Set addJavascriptInterface for your webview, interfaceName is rxWallBridge；
+
+```java
+mOWIFrameWebView.addJavascriptInterface(new RXOWBridge(), "rxWallBridge");
+```
+
+2、Implement  JavascriptInterface；
+
+```java
+class RXOWBridge {
+
+    @JavascriptInterface
+    public void onPrizeReward(String prizeId) {
+        Log.d("Roulax", "Callback prize reward: " + prizeId);
+        // Please implement your reward issuance logic here
+    }
+}
+```
+

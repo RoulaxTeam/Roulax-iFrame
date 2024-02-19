@@ -35,3 +35,25 @@ window.open("https://wall.roulax.io/discovery?app_id={app_id}&unit_id={unit_id}&
 | publisher_id | 你的PublisherId，可从平台中获取。（从平台中获取的OW H5 Link已填写publisher_id） | mandatory |
 | gaid         | 如果是Android用户，请填写GAID；如果是iOS用户，请填写IDFA     | mandatory |
 | userid       | 唯一的用户ID                                                 | mandatory |
+
+## 接收奖励回调
+
+1、为你的webview设置addJavascriptInterface，interfaceName是rxWallBridge；
+
+```java
+mOWIFrameWebView.addJavascriptInterface(new RXOWBridge(), "rxWallBridge");
+```
+
+2、实现JavascriptInterface；
+
+```java
+class RXOWBridge {
+
+    @JavascriptInterface
+    public void onPrizeReward(String prizeId) {
+        Log.d("Roulax", "Callback prize reward: " + prizeId);
+        // 请在这里实现你的奖励下发逻辑
+    }
+}
+```
+
